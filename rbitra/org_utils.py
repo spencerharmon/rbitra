@@ -1,9 +1,13 @@
-import rbitra
-from models import Organization, Configuration
+from rbitra import db
+from rbitra.models import Organization, Configuration
 
-def create_local_org(name, *, localserver=Configuration.query.filter_by(name='current_config')  ):
-    org = Organization(name=name, server=localserver)
-    rbitra.db.session.add(org)
+#localsrv = Configuration.query.filter_by(name='current_config').first().server
+#def create_org(name, *, srv=Configuration.query.filter_by(name='current_config').first().server):
+def create_org(name, srv):
 
-def add_remote_org(name, server):
-    pass
+    #creates an organization.
+    #API resource is not exposed to specify server. local server is used by default.
+
+    org = Organization(name=name, server=srv)
+    db.session.add(org)
+    db.session.commit()

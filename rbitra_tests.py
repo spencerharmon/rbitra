@@ -1,9 +1,5 @@
-from rbitra import create_app, db
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from rbitra.models import Configuration
-from flask_migrate import init, migrate, upgrade
+from rbitra import create_app, db, configure
+from rbitra.models import Configuration, Server
 import unittest
 import tempfile
 from flask_testing import TestCase
@@ -25,9 +21,20 @@ class BasicIntegrationTest(TestCase):
 
     def test_install(self):
         self.client.get('/install')
-        #current_config = Configuration.query.all()
         current_config = Configuration.query.filter_by(name='current_config').first()
         self.assertEqual(current_config.any_member_may_create_orgs, True)
+
+    def test_default_server_db_update(self):
+        configure.create_local_server()
+        recieved = Server.query.get(1)
+        expected = {
+            'id': 1,
+            'fqdn': 'localhost',
+            'port': 443
+        }
+        self.assertEqual(recieved.id, expected['id'])
+        self.assertEqual(recieved.fqdn, expected['fqdn'])
+        self.assertEqual(recieved.port, expected['port'])
 
 if __name__ == '__main__':
     unittest.main()
