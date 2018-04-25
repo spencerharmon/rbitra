@@ -1,20 +1,33 @@
-import os
-import rbitra
+from rbitra import create_app, db
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from rbitra.models import Configuration
+from flask_migrate import init, migrate, upgrade
 import unittest
 import tempfile
+from flask_testing import TestCase
 
-class BasicTestCase(unittest.TestCase):
+class BasicIntegrationTest(TestCase):
+    def create_app(self):
+        return create_app(test=True)
 
     def setUp(self):
-        self.db_fd, flaskr.app.config['DATABASE'] = tempfile.mkstemp()
-        flaskr.app.testing = True
-        self.app = flaskr.app.test_client()
-        with flaskr.app.app_context():
-            flaskr.init_db()
+        db.create_all()
 
     def tearDown(self):
-        os.close(self.db_fd)
-        os.unlink(flaskr.app.config['DATABASE'])
+        db.session.remove()
+        db.drop_all()
+
+    def test_root_page(self):
+        response = self.client.get('/')
+        self.assert200(response)
+
+    def test_install(self):
+        self.client.get('/install')
+        #current_config = Configuration.query.all()
+        current_config = Configuration.query.filter_by(name='current_config').first()
+        self.assertEqual(current_config.any_member_may_create_orgs, True)
 
 if __name__ == '__main__':
     unittest.main()
