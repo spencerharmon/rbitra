@@ -17,4 +17,4 @@ class Server(db.Model):
     port = db.Column(db.Integer, default=443)
 
     def __repr__(self):
-        return 
+        return '{}:{}'.format(self.fqdn, self.port)

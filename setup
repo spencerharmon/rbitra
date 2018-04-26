@@ -1,2 +1,2 @@
 #!/bin/bash
-pip install flask flask-restful flask-sqlalchemy flask-migrate flask-script flask-testing
+pip install flask flask-restful flask-sqlalchemy flask-testing flask-apiexceptions

@@ -1,5 +1,5 @@
 from rbitra import create_app, db, configure
-from rbitra.models import Configuration, Server
+from rbitra.models import Configuration, Server, Organization
 import unittest
 import tempfile
 from flask_testing import TestCase
@@ -12,8 +12,9 @@ class BasicIntegrationTest(TestCase):
         db.create_all()
 
     def tearDown(self):
-        db.session.remove()
-        db.drop_all()
+        pass
+        #db.session.remove()
+        #db.drop_all()
 
     def test_root_page(self):
         response = self.client.get('/')
@@ -35,6 +36,16 @@ class BasicIntegrationTest(TestCase):
         self.assertEqual(recieved.id, expected['id'])
         self.assertEqual(recieved.fqdn, expected['fqdn'])
         self.assertEqual(recieved.port, expected['port'])
+
+    def test_create_org(self):
+        response = self.client.post('/create/org', data={'name': "test org"})
+        result = Organization.query.filter_by(name="test org").first()
+
+        self.assert200(response)
+        self.assertNotEqual(result, None)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
