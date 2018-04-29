@@ -1,10 +1,7 @@
 from rbitra import db
 from rbitra.models import Organization, Configuration
 from rbitra.api_errors import DefaultServerUnconfigured
-from flask_apiexceptions import ApiError, ApiException
 
-#localsrv = Configuration.query.filter_by(name='current_config').first().server
-#def create_org(name, *, srv=Configuration.query.filter_by(name='current_config').first().server):
 def create_org(name, srv=None):
     """
     creates an organization.
@@ -14,8 +11,8 @@ def create_org(name, srv=None):
         try:
             qry = Configuration.query.filter_by(name='current_config').first()
             localsrv = qry.server
-        except AttributeError:
-            raise DefaultServerUnconfigured
+        except AttributeError as e:
+            raise DefaultServerUnconfigured from e
         org = Organization(name=name, server=localsrv)
         db.session.add(org)
         db.session.commit()

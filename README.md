@@ -84,13 +84,13 @@ Different aspects of the decision engine depend on quora. These are mutable prop
 ### Roles and Policies
 - Roles are associated with an organization to link to members to policies.
 - Policies link decisions to roles.
-- A policy has one of two types: read-only or read-write.
+- A policy has one of two types: observe (read-only) or participate (read-write).
 - There are two default roles, public, and organization
 - Public - any member from any organization (Read only for unauthenticated users)
 - Organization - any member of this organization
 - Organizations may define a custom internal role structure. a role's parent will always have read/write permission for all of its policies.
 
-Default roles represent a separate, predefined (by the relationship of members to organizations) higherarchy for decisions. the csustom organization refines roles.
+Default roles represent a separate, predefined (by the relationship of members to organizations) higherarchy for decisions. the custom organization refines roles.
 
 Organizations may define custom roles. An organization must have at least one role without a parent. Subsequent roles may optionally have one parent.
 
@@ -134,10 +134,12 @@ Members editing modification through the rbitra portal can choose to turn on col
 ORM/DB
 
 	organization
+	    id (primary)
 		name
 		server_key (foreign, default: localhost)
 
 	role
+	    id (primary)
 		organization_key (foreign)
 		name
 
@@ -146,6 +148,7 @@ ORM/DB
 		member_key (foreign)
 
 	policy
+	    id (primary)
 		organization_key (foreign)
 		policy_type #RO or RW
 		name
@@ -153,10 +156,6 @@ ORM/DB
 	policy_role
 		policy_key (foreign)
 		role_key (foreign)
-
-	org_policy_role
-		policy_key(foreign)
-		org_key(foreign)
 
 	decision_policy
 		decision_key (foreign)
@@ -192,6 +191,7 @@ ORM/DB
 		member_key (foreign)
 
 	member
+	    id (primary)
 		name
 		server_key (foreign, default: localhost)
 

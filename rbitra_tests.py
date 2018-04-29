@@ -1,7 +1,7 @@
 from rbitra import create_app, db, configure
-from rbitra.models import Configuration, Server, Organization
+from rbitra.models import Configuration, Server, Organization, Member, MemberDigest
 from rbitra.configure import set_default_config
-from rbitra.org_utils import create_org
+from werkzeug.security import check_password_hash
 import unittest
 import tempfile
 from flask_testing import TestCase
@@ -57,6 +57,21 @@ class BasicIntegrationTest(TestCase):
         self.assertEqual(result, None)
 
 
+    def test_create_member(self):
+        set_default_config()
+        response = self.client.post(
+            '/create/member',
+            data={
+                'member_name': "testuser",
+                'password': "test123"
+            }
+        )
+        member = Member.query.filter_by(name="testuser").first()
+        digest = MemberDigest.query.filter_by(member=member.id).first()
+
+        self.assert200(response)
+        self.assertNotEqual(member, None)
+        self.assertTrue(check_password_hash(digest.digest, "test123"))
 
 
 if __name__ == '__main__':
