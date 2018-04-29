@@ -2,11 +2,11 @@ from rbitra import db
 from rbitra.models import Configuration, Server
 
 
-
 def set_any_member_may_create_orgs(b=True):
     current_config = Configuration.query.filter_by(config_name='current_config').first()
     current_config['any_member_may_create_orgs'] = b
     db.session.commit()
+
 
 def create_local_server():
     server = Server(
@@ -16,6 +16,7 @@ def create_local_server():
     )
     db.session.add(server)
     db.session.commit()
+
 
 def set_default_config():
     create_local_server()

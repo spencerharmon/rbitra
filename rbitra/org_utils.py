@@ -1,5 +1,6 @@
-from rbitra import db, exception_handler
+from rbitra import db
 from rbitra.models import Organization, Configuration
+from rbitra.api_errors import DefaultServerUnconfigured
 from flask_apiexceptions import ApiError, ApiException
 
 #localsrv = Configuration.query.filter_by(name='current_config').first().server
@@ -11,15 +12,15 @@ def create_org(name, srv=None):
     """
     if srv is None:
         try:
-            qry = Configuration.query.filter_by(name='current_config').first().server
+            qry = Configuration.query.filter_by(name='current_config').first()
+            localsrv = qry.server
         except AttributeError:
-            err = ApiError(
-                code="Default unavailable.",
-                message="Default server not found. Likely need to run /install."
-            )
-            raise ApiException(status_code=500, error=err)
+            raise DefaultServerUnconfigured
+        org = Organization(name=name, server=localsrv)
+        db.session.add(org)
+        db.session.commit()
     else:
-        localsrv = srv
-    org = Organization(name=name, server=localsrv)
-    db.session.add(org)
-    db.session.commit()
+        org = Organization(name=name, server=srv)
+        db.session.add(org)
+        db.session.commit()
+
