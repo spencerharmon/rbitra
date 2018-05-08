@@ -1,6 +1,7 @@
 from rbitra import create_app, db, configure
 from rbitra.models import Configuration, Server, Organization, Member, MemberDigest
 from rbitra.configure import set_default_config
+from rbitra.plugins.meta_plugin import MetaPlugin
 from werkzeug.security import check_password_hash
 import unittest
 import tempfile
@@ -67,12 +68,24 @@ class BasicIntegrationTest(TestCase):
             }
         )
         member = Member.query.filter_by(name="testuser").first()
-        digest = MemberDigest.query.filter_by(member=member.id).first()
+        digest = MemberDigest.query.filter_by(member=member.uuid).first()
 
         self.assert200(response)
         self.assertNotEqual(member, None)
         self.assertTrue(check_password_hash(digest.digest, "test123"))
 
+
+    def test_create_decision_add_member_to_org(self):
+        set_default_config()
+        self.client.post(
+            '/create/member',
+            data={
+                'member_name': "testuser",
+                'password': "test123"
+            }
+        )
+        self.client.post('/create/org', data={'org_name': "test org"})
+        response = self.client.post()
 
 if __name__ == '__main__':
     unittest.main()
