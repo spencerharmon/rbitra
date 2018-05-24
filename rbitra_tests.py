@@ -97,7 +97,7 @@ class BasicIntegrationTest(TestCase):
 
         plugin_resp = self.client.post(
             '/install/plugin',
-            data={'git_url': 'file:///home/spencer/git-repos/meta_plugin'}
+            data={'git_url': 'https://www.github.com/spencerharmon/meta_plugin'}
         )
         plugin = json.loads(plugin_resp.json)
         self.assert200(plugin_resp)
