@@ -49,9 +49,9 @@ class FailedToCreateDecision(DecisionError):
     """
     Raised when decision creation fails.
     """
-    def __init__(self, reason, data):
-        self.description = "Could not create decision. {}".format(reason)
-        self.data = data
+    def __init__(self, data):
+        self.description = "Could not create decision: {}".format(data)
+        super().__init__(self.description)
 
 
 class DataLoadError(DecisionError):
@@ -60,3 +60,4 @@ class DataLoadError(DecisionError):
     """
     def __init__(self, data):
         self.description = "Could not load: {}".format(data)
+        super().__init__(self.description)

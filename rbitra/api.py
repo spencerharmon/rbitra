@@ -4,9 +4,12 @@ from rbitra.configure import set_default_config
 from rbitra.org_utils import create_org
 from rbitra.member_utils import create_member
 from rbitra.decision_utils import DecisionUtils
+from rbitra.plugin_utils import install_plugin
+from rbitra.schema import OrganizationSchema, MemberSchema, DecisionSchema, PluginSchema
 from flask_httpauth import HTTPBasicAuth
 
 api = Api(create_app())
+
 
 class HelloWorld(Resource):
     def get(self):
@@ -31,7 +34,9 @@ class CreateOrg(Resource):
 
     def post(self):
         args = self.parser.parse_args()
-        create_org(args['org_name'])
+        schema = OrganizationSchema()
+        org = create_org(args['org_name'])
+        return schema.dumps(org)
 
 
 api.add_resource(CreateOrg, '/create/org')
@@ -55,10 +60,13 @@ class CreateMember(Resource):
 
     def post(self):
         args = self.parser.parse_args()
-        create_member(args['member_name'], args['password'])
+        schema = MemberSchema()
+        member = create_member(args['member_name'], args['password'])
+        return schema.dumps(member)
 
 
 api.add_resource(CreateMember, '/create/member')
+
 
 class CreateDecision(Resource):
     def __init__(self):
@@ -66,7 +74,7 @@ class CreateDecision(Resource):
         self.parser.add_argument(
             'title',
             type=str,
-            help='A title for the decision."
+            help='A title for the decision.',
             required=True
         )
         self.parser.add_argument(
@@ -103,6 +111,29 @@ class CreateDecision(Resource):
             org=args["org"],
             directory=args["directory"]
         )
-        du.create_decision()
+        schema = DecisionSchema()
+        decision = du.create_decision()
+        return schema.dumps(decision)
 
-    api.add_resource(CreateDecision, '/create/decision')
+
+api.add_resource(CreateDecision, '/create/decision')
+
+
+class InstallPlugin(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument(
+            'git_url',
+            type=str,
+            help='URL for repository containing plugin.',
+            required=True
+        )
+
+    def post(self):
+        args = self.parser.parse_args()
+        schema = PluginSchema()
+        member = install_plugin(args['git_url'])
+        return schema.dumps(member)
+
+
+api.add_resource(InstallPlugin, '/install/plugin')

@@ -46,12 +46,13 @@ class Decision(db.Model):
     title = db.Column(db.String(512))
     org = db.Column(db.String(36), db.ForeignKey('organization.uuid'))
     author = db.Column(db.String(36), db.ForeignKey('member.uuid'))
-    plugin = db.Column(db.Integer, db.ForeignKey('plugin.id'))
+    plugin = db.Column(db.Integer, db.ForeignKey('plugin.uuid'))
     directory = db.Column(db.String(512))
-    approvals = db.Column(db.Integer)
 
 
 class Plugin(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    uuid = db.Column(db.String(36), primary_key=True)
     title = db.Column(db.String(128))
     module_name = db.Column(db.String(128))
+    class_name = db.Column(db.String(128))
+    path = db.Column(db.String(1024), unique=True)

@@ -1,5 +1,7 @@
-from dulwich import porcelain
+from rbitra.decision_utils import gen_full_path
 from rbitra.api_errors import RepoCouldNotBeLoaded, PluginMethodUndefined
+from dulwich import porcelain
+
 
 class PluginProto(object):
     """
@@ -15,19 +17,22 @@ class PluginProto(object):
     between git and unstructured document databases, Git is the first choice in spite of
     the slower transaction rate.
     """
-    def __init__(self, **kwargs):
-        self.name = kwargs['name']
-        self.decision = kwargs['decision']
+    def __init__(self, decision):
+        """
+
+        :param decision: Decision (db) object
+        """
+        self.decision = decision
         self.type = None
         self.valid_actions = None
-        self.repo_path = kwargs['repo_path']
         self.load_repo()
 
     def load_repo(self):
         try:
-            self.repo = porcelain.init(self.repo_path)
+            self.repo = porcelain.init(gen_full_path(self.decision))
         except:
-            raise RepoCouldNotBeLoaded(self.repo_path)
+            raise
+#            raise RepoCouldNotBeLoaded(self.decision)
 
     def parse_repo(self):
         '''

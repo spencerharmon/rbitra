@@ -1,9 +1,10 @@
 from rbitra import create_app, db, configure
 from rbitra.models import Configuration, Server, Organization, Member, MemberDigest
 from rbitra.configure import set_default_config
-from rbitra.plugins.meta_plugin import MetaPlugin
+from rbitra.schema import MemberSchema, OrganizationSchema
 from werkzeug.security import check_password_hash
 import unittest
+import json
 import tempfile
 from flask_testing import TestCase
 
@@ -77,15 +78,41 @@ class BasicIntegrationTest(TestCase):
 
     def test_create_decision_add_member_to_org(self):
         set_default_config()
-        self.client.post(
+        member_resp = self.client.post(
             '/create/member',
             data={
                 'member_name': "testuser",
                 'password': "test123"
             }
         )
-        self.client.post('/create/org', data={'org_name': "test org"})
-        response = self.client.post()
+        member = json.loads(member_resp.json)
+        self.assert200(member_resp)
+
+        org_resp = self.client.post(
+            '/create/org',
+            data={'org_name': "test org"}
+        )
+        org = json.loads(org_resp.json)
+        self.assert200(org_resp)
+
+        plugin_resp = self.client.post(
+            '/install/plugin',
+            data={'git_url': 'file:///home/spencer/git-repos/meta_plugin'}
+        )
+        plugin = json.loads(plugin_resp.json)
+        self.assert200(plugin_resp)
+
+        response = self.client.post(
+            '/create/decision',
+            data={
+                "title": "test decision",
+                "plugin": plugin["uuid"],
+                "member": member["uuid"],
+                "org": org["uuid"],
+                "directory": "testdecision"
+            }
+        )
+        self.assert200(response)
 
 if __name__ == '__main__':
     unittest.main()

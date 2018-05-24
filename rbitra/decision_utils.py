@@ -2,11 +2,23 @@
 from rbitra import db
 from rbitra.models import Configuration, Decision, Plugin, Organization, Member
 from rbitra.api_errors import FailedToCreateDecision, DataLoadError
-from rbitra.pluginproto import PluginProto
+from rbitra.plugin_utils import load_plugin
+from rbitra.schema import DecisionSchema, OrganizationSchema, MemberSchema, PluginSchema
 from uuid import uuid4
 from dulwich import porcelain
 import json
+import os
 import importlib
+
+
+def gen_full_path(decision):
+    full_path = os.path.join(
+        Configuration.query.filter_by(name="current_config").first().decision_path,
+        decision.uuid,
+        decision.directory
+    )
+    print('~~~~~~~~~~~~~~\n{}\n~~~~~~~~~~~~'.format(full_path))
+    return full_path
 
 
 class DecisionUtils(object):
@@ -28,8 +40,8 @@ class DecisionUtils(object):
 
     def load_models(self):
         if(
-                self.author is None |
-                self.plugin is None |
+                self.author is None or
+                self.plugin is None or
                 self.org is None
         ):
             items = {
@@ -37,7 +49,8 @@ class DecisionUtils(object):
                 "plugin": Plugin.query.filter_by(uuid=self.decision.plugin).first(),
                 "org": Organization.query.filter_by(uuid=self.decision.org).first()
             }
-            for typ, value in items:
+            print(items)
+            for typ, value in items.items():
                 if value is None:
                     raise DataLoadError(typ)
             self.author = items["author"]
@@ -55,21 +68,30 @@ class DecisionUtils(object):
     def create_decision(self):
         try:
             assert self.decision.uuid is None
-            self.decision.uuid = uuid4()
+            self.decision.uuid = str(uuid4())
             self.ensure_valid_values()
             db.session.add(self.decision)
-            db.session.commit()
 
-            full_path = self.gen_full_path()
+            full_path = gen_full_path(self.decision)
+            self.create_decision_repo(full_path)
+
             file_name = "rbitra.json"
             data = self.gen_repo_description_json()
             message = "Repository created by rbitra. Adding decision metadata in rbitra.json."
             self.modify_add_commit_file(full_path, file_name, data, message)
 
             self.init_plugin()
-        except Exception as e:
-            raise FailedToCreateDecision(str(e), self.decision.__dict__)
 
+            db.session.commit()
+            return self.decision
+        except AttributeError as e:
+            raise
+#            raise FailedToCreateDecision(e)
+
+
+    def create_decision_repo(self, path):
+        os.makedirs(path)
+        porcelain.init(path, bare=True)
 
     def modify_add_commit_file(self, repo_path, file_name, new_contents, message):
         """
@@ -82,40 +104,34 @@ class DecisionUtils(object):
         """
         repo = porcelain.init(repo_path)
 
-        file_path = "{}/{}".format(repo_path, file_name)
-        rbitra_datafile = open(file_path)
-        rbitra_datafile.write(new_contents)
-        rbitra_datafile.close()
+        file_path = os.path.join(repo_path, file_name)
+        with open(file_path, 'w') as rbitra_datafile:
+            rbitra_datafile.write(new_contents)
 
-        porcelain.add(repo, file_name)
+        porcelain.add(repo, file_path)
         porcelain.commit(repo, message)
 
-    def gen_full_path(self):
-        full_path = "{}/{}/{}".format(
-            Configuration.query(name="current_config").first().decision_path,
-            self.decision.uuid,
-            self.decision.dir
-        )
-        return full_path
+
 
     def init_plugin(self):
-        plugin_name = "rbitra.plugins.{}".format(
-            Plugin.query.filer_by(
+        plugin_data = Plugin.query.filter_by(
                 uuid=self.decision.plugin
-            ).first().module_name
-        )
-        plugin = importlib.import_module(plugin_name)
-        plugin.decision = self.decision
+            ).first()
+        plugin = load_plugin(plugin_data, self.decision)
         plugin.init_decision_repo()
 
     def gen_repo_description_json(self):
         self.load_models()
 
+        ds = DecisionSchema()
+        os = OrganizationSchema()
+        ms = MemberSchema()
+        ps = PluginSchema()
         data = {
-            "Decision": self.decision.__dict__,
-            "Organization": self.org.__dict__,
-            "Member": self.author.__dict__,
-            "plugin": self.plugin.__dict__,
+            "Decision": ds.dump(self.decision),
+            "Organization": os.dump(self.org),
+            "Member": ms.dump(self.author),
+            "plugin": ps.dump(self.plugin)
         }
         return json.dumps(data)
 

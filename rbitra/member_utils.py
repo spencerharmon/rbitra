@@ -4,6 +4,7 @@ from rbitra.api_errors import DefaultServerUnconfigured
 from rbitra.auth import auth
 from werkzeug.security import generate_password_hash
 from uuid import uuid4
+import json
 
 def create_member(name, password, srv=None, uuid=None):
     """

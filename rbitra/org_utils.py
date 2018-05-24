@@ -2,6 +2,8 @@ from rbitra import db
 from rbitra.models import Organization, Configuration, OrgMember
 from rbitra.api_errors import DefaultServerUnconfigured
 from uuid import uuid4
+import json
+
 
 def create_org(name, srv=None, uuid=None):
     """

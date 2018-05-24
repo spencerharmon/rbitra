@@ -8,3 +8,4 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     RBITRA_DECISION_PATH = os.path.join(basedir, "decisions")
+    RBITRA_PLUGINS_PATH = os.path.join(basedir, "plugins")
