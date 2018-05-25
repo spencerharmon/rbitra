@@ -1,6 +1,6 @@
 from rbitra.decision_utils import gen_full_path
 from rbitra.api_errors import RepoCouldNotBeLoaded, PluginMethodUndefined
-from dulwich import porcelain
+from dulwich.repo import Repo
 
 
 class PluginProto(object):
@@ -29,7 +29,7 @@ class PluginProto(object):
 
     def load_repo(self):
         try:
-            self.repo = porcelain.init(gen_full_path(self.decision))
+            self.repo = Repo.discover(start=gen_full_path(self.decision))
         except:
             raise
 #            raise RepoCouldNotBeLoaded(self.decision)
