@@ -1,7 +1,7 @@
 from rbitra.models import Plugin
 from rbitra import db
 from dulwich import porcelain
-import importlib
+from rbitra.protoplugin import ProtoPlugin
 from importlib.machinery import SourceFileLoader
 from flask import current_app
 import os
@@ -57,17 +57,14 @@ def initialize_plugin_metadata(path):
     #todo: marshall the data in plugin's __init__.py
     return plugin
 
+
 def load_plugin(plugin, decision):
-    full_path = '{}/{}/{}'.format(
-        current_app.config['RBITRA_PLUGINS_PATH'],
-        plugin.path,
-        '{}{}'.format(
-            plugin.module_name,
-            '.py'
+    module = SourceFileLoader(
+        'plugin',
+        '{}/{}/{}'.format(
+            current_app.config["RBITRA_PLUGINS_PATH"],
+            plugin.path,
+            '__init__.py'
         )
-    )
-    print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!11\nplugins path: {}\n'.format(current_app.config['RBITRA_PLUGINS_PATH']))
-    print('!!!!!!!!!!!!!!!!!!!!!!!\nload_plugin full_path: {}\n!!!!!!!!!!!!!!!!'.format(full_path))
-    module = SourceFileLoader(plugin.module_name, full_path).load_module()
-    plugin_class = getattr(module, plugin.class_name)
-    return plugin_class(decision)
+    ).load_module()
+    return ProtoPlugin(decision, module)

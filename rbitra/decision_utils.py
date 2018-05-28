@@ -111,8 +111,6 @@ class DecisionUtils(object):
         porcelain.add(repo, file_path)
         porcelain.commit(repo, message)
 
-
-
     def init_plugin(self):
         plugin_data = Plugin.query.filter_by(
                 uuid=self.decision.plugin
