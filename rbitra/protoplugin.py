@@ -20,12 +20,8 @@ class ProtoPlugin(object):
         self.attachments = []
         self.actions = {}
         self.repo = Repo.discover(start=decision_utils.gen_full_path(self.decision))
+        self.du = decision_utils.DecisionUtils(decision)
 
-    def file_list(self):
-        """
-        :return: list of files in repo
-        """
-        return list(self.repo.open_index())
 
     def parse_repo(self):
         '''
@@ -34,8 +30,8 @@ class ProtoPlugin(object):
         repo, and raises an exception otherwise.
         :returns: JSON
         '''
-        for file in self.file_list():
-            if file.name is "rbitra_info.json":
+        for file in self.du.file_list():
+            if file.name is "rbitra.json":
                 self.check_and_load_actions(file)
             else:
                 self.attachments.append(file)
@@ -82,8 +78,11 @@ class ProtoPlugin(object):
         :return: None. Raises marshmallow ValidationError if
         """
         #TODO: catch invalid action strings
-        schema = self.plugin_module.valid_actions[action.keys()[1]]["arg_schema"]()
-        schema.load(action.values()[1])
+        try:
+            schema = self.plugin_module.valid_actions[list(action.keys())[0]]["arg_schema"]()
+            schema.dump(list(action.values())[0])
+        except AttributeError:
+            raise PluginMethodUndefined(action.keys()[1])
 
     def enact(self):
         """

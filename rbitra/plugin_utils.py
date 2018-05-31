@@ -36,7 +36,6 @@ def clone_plugin_repo(git_url):
             git_url.replace('/', '-')
         )
     )
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n{}\n!!!!!!!!!!!!!!!!!!!!!!!!!".format(repo.path))
     return repo
 
 
@@ -51,14 +50,13 @@ def initialize_plugin_metadata(path):
         title=module.details["title"],
         uuid=module.details["uuid"],
         module_name=module.details["module_name"],
-        class_name=module.details["class_name"],
         path=path.replace(current_app.config["RBITRA_PLUGINS_PATH"], '')
     )
     #todo: marshall the data in plugin's __init__.py
     return plugin
 
 
-def load_plugin(plugin, decision):
+def load_plugin_module(plugin):
     module = SourceFileLoader(
         'plugin',
         '{}/{}/{}'.format(
@@ -67,4 +65,25 @@ def load_plugin(plugin, decision):
             '__init__.py'
         )
     ).load_module()
+    return module
+
+
+def load_plugin(decision):
+    plugin = Plugin.query.filter_by(
+        uuid=decision.plugin
+    ).first()
+    module = load_plugin_module(plugin)
     return ProtoPlugin(decision, module)
+
+
+def list_plugin_actions(plugin):
+    """
+    :return: dict of available actions in plugin
+    """
+    module = load_plugin_module(plugin)
+
+    valid_actions = {}
+    for action in module.valid_actions.keys():
+        # {'action': ['arg1', 'arg2']}
+        valid_actions[action] = list(module.valid_actions[action]["arg_schema"]().__dict__["declared_fields"].keys())
+    return valid_actions

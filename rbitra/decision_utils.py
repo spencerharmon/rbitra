@@ -17,23 +17,18 @@ def gen_full_path(decision):
         decision.uuid,
         decision.directory
     )
-    print('~~~~~~~~~~~~~~\n{}\n~~~~~~~~~~~~'.format(full_path))
     return full_path
 
 
 class DecisionUtils(object):
-    def __init__(self, *, uuid=None, title=None, plugin=None, member=None, org=None, directory=None):
-        self.decision = Decision()
-        self.decision.uuid = uuid
-        self.decision.title = title
-        self.decision.author = member
-        self.decision.org = org
-        self.decision.plugin = plugin
-        self.decision.directory = directory
+    def __init__(self, decision=None, actions=None):
+        self.decision = decision
+        self.actions = actions
 
         self.author = None
         self.plugin = None
         self.org = None
+        self.repo = None
 
     def default_decision_title(self):
         return "Default Decision Title"
@@ -49,7 +44,6 @@ class DecisionUtils(object):
                 "plugin": Plugin.query.filter_by(uuid=self.decision.plugin).first(),
                 "org": Organization.query.filter_by(uuid=self.decision.org).first()
             }
-            print(items)
             for typ, value in items.items():
                 if value is None:
                     raise DataLoadError(typ)
@@ -75,10 +69,14 @@ class DecisionUtils(object):
             full_path = gen_full_path(self.decision)
             self.create_decision_repo(full_path)
 
+
             file_name = "rbitra.json"
             data = self.gen_repo_description_json()
-            message = "Repository created by rbitra. Adding decision metadata in rbitra.json."
+            message = "Repo created by Rbitra. Adding decision metadata in rbitra.json."
             self.modify_add_commit_file(full_path, file_name, data, message)
+
+            if self.actions is not None:
+                self.set_actions(self.actions)
 
             self.init_plugin()
 
@@ -91,7 +89,17 @@ class DecisionUtils(object):
 
     def create_decision_repo(self, path):
         os.makedirs(path)
-        porcelain.init(path, bare=True)
+        repo = porcelain.init(path)
+        self.repo = repo
+
+    def file_list(self):
+        """
+        :return: list of files in repo
+        """
+        full_path = gen_full_path(self.decision)
+
+        file_list = [open('{}/{}'.format(full_path, f), 'w') for r, d, f in os.walk(full_path)]
+        return file_list
 
     def modify_add_commit_file(self, repo_path, file_name, new_contents, message):
         """
@@ -102,37 +110,53 @@ class DecisionUtils(object):
         :param message: string; commit message for git
         :return: None
         """
-        repo = porcelain.init(repo_path)
 
         file_path = os.path.join(repo_path, file_name)
         with open(file_path, 'w') as rbitra_datafile:
             rbitra_datafile.write(new_contents)
-
-        porcelain.add(repo, file_path)
-        porcelain.commit(repo, message)
+        porcelain.add(self.repo, file_path)
+        porcelain.commit(self.repo, message)
 
     def init_plugin(self):
-        plugin_data = Plugin.query.filter_by(
-                uuid=self.decision.plugin
-            ).first()
-        plugin = load_plugin(plugin_data, self.decision)
+        plugin = load_plugin(self.decision)
         plugin.init_decision_repo()
 
     def gen_repo_description_json(self):
         self.load_models()
 
         ds = DecisionSchema()
-        os = OrganizationSchema()
+        orgsch = OrganizationSchema()
         ms = MemberSchema()
         ps = PluginSchema()
         data = {
             "Decision": ds.dump(self.decision),
-            "Organization": os.dump(self.org),
+            "Organization": orgsch.dump(self.org),
             "Member": ms.dump(self.author),
             "plugin": ps.dump(self.plugin)
         }
         return json.dumps(data)
 
+    def set_actions(self, actions):
+        for k,v in actions.items():
+            self.append_action({k: v})
+
+    def append_action(self, action):
+        plugin = load_plugin(self.decision)
+        plugin.check_action_arguments(action)
+        contents = {}
+        for file in self.file_list():
+            if file.name is "rbitra.json":
+                contents = json.load(file)
+                contents["actions"] = action
+                self.modify_add_commit_file(
+                    self.decision.directory,
+                    file.name,
+                    json.dumps(contents),
+                    "Rbitra appended action: {}".format(json.dumps(action))
+                )
+                file.close()
+            else:
+                file.close()
     # todo: @
     def submit_approval():
         db.Model

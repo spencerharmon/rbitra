@@ -4,19 +4,13 @@ from rbitra.configure import set_default_config
 from rbitra.org_utils import create_org
 from rbitra.member_utils import create_member
 from rbitra.decision_utils import DecisionUtils
-from rbitra.plugin_utils import install_plugin
+from rbitra.plugin_utils import install_plugin, list_plugin_actions
+from rbitra.models import Decision, Plugin
 from rbitra.schema import OrganizationSchema, MemberSchema, DecisionSchema, PluginSchema
+import json
 from flask_httpauth import HTTPBasicAuth
 
 api = Api(create_app())
-
-
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
-
-
-api.add_resource(HelloWorld, '/')
 
 
 class Install(Resource):
@@ -101,16 +95,26 @@ class CreateDecision(Resource):
             help='Name of the decision repository\'s directory',
             required=True
         )
+        self.parser.add_argument(
+            'actions',
+            type=str,
+            help='JSON actions dictionary for ProtoPlugin.' +
+                 'Valid format is provided at the "/plugin/[plugin name/uuid]/valid_actions" resource ' +
+                 'or the /decision/[decision uuid]/valid_actions resource.',
+            required=True
+        )
 
     def post(self):
         args = self.parser.parse_args()
-        du = DecisionUtils(
+        decision = Decision(
             title=args["title"],
             plugin=args["plugin"],
-            member=args["member"],
+            author=args["member"],
             org=args["org"],
             directory=args["directory"]
         )
+        actions = json.loads(args["actions"])
+        du = DecisionUtils(decision, actions=actions)
         schema = DecisionSchema()
         decision = du.create_decision()
         return schema.dumps(decision)
@@ -118,6 +122,15 @@ class CreateDecision(Resource):
 
 api.add_resource(CreateDecision, '/create/decision')
 
+
+class PluginValidActions(Resource):
+
+    def get(self, title):
+        plugin = Plugin.query.filter_by(title=title).first()
+        return json.dumps(list_plugin_actions(plugin))
+
+
+api.add_resource(PluginValidActions, '/plugin/<string:title>/valid_actions')
 
 class InstallPlugin(Resource):
     def __init__(self):

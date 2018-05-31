@@ -19,10 +19,6 @@ class BasicIntegrationTest(TestCase):
         db.session.remove()
         db.drop_all()
 
-    def test_root_page(self):
-        response = self.client.get('/')
-        self.assert200(response)
-
     def test_install(self):
         self.client.get('/install')
         current_config = Configuration.query.filter_by(name='current_config').first()
@@ -102,6 +98,15 @@ class BasicIntegrationTest(TestCase):
         plugin = json.loads(plugin_resp.json)
         self.assert200(plugin_resp)
 
+        valid_actions_resp = self.client.get(
+            '/plugin/{}/valid_actions'.format(plugin["title"])
+        )
+        actions = {}
+        valid_actions = json.loads(valid_actions_resp.json)
+        print("><><>\n><><><\n{}".format(valid_actions))
+        for k, v in valid_actions.items():
+            # {'add_member_to_org': {'member': <str:uuid>, 'org': <str:uuid>}}
+            actions[k] = {v[0]: member['uuid'], v[1]: org['uuid']}
         response = self.client.post(
             '/create/decision',
             data={
@@ -109,7 +114,8 @@ class BasicIntegrationTest(TestCase):
                 "plugin": plugin["uuid"],
                 "member": member["uuid"],
                 "org": org["uuid"],
-                "directory": "testdecision"
+                "directory": "testdecision",
+                "actions": json.dumps(actions)
             }
         )
         self.assert200(response)
