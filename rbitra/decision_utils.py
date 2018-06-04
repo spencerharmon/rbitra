@@ -98,7 +98,9 @@ class DecisionUtils(object):
         """
         full_path = gen_full_path(self.decision)
 
-        file_list = [open('{}/{}'.format(full_path, f), 'w') for r, d, f in os.walk(full_path)]
+        file_list = [open('{}/{}'.format(full_path, f), 'w')
+                     for f in os.listdir(full_path)
+                     if os.path.isfile('{}/{}'.format(full_path, f))]
         return file_list
 
     def modify_add_commit_file(self, repo_path, file_name, new_contents, message):
@@ -144,6 +146,7 @@ class DecisionUtils(object):
         plugin = load_plugin(self.decision)
         plugin.check_action_arguments(action)
         contents = {}
+        print('\n\n\n\n\n\n\n\{}\n\n\n\n\n\n\n\n'.format(self.file_list()))
         for file in self.file_list():
             if file.name is "rbitra.json":
                 contents = json.load(file)
