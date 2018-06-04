@@ -8,7 +8,8 @@ from uuid import uuid4
 from dulwich import porcelain
 import json
 import os
-import importlib
+import re
+import pprint
 
 
 def gen_full_path(decision):
@@ -98,7 +99,7 @@ class DecisionUtils(object):
         """
         full_path = gen_full_path(self.decision)
 
-        file_list = [open('{}/{}'.format(full_path, f), 'w')
+        file_list = ['{}/{}'.format(full_path, f)
                      for f in os.listdir(full_path)
                      if os.path.isfile('{}/{}'.format(full_path, f))]
         return file_list
@@ -112,7 +113,6 @@ class DecisionUtils(object):
         :param message: string; commit message for git
         :return: None
         """
-
         file_path = os.path.join(repo_path, file_name)
         with open(file_path, 'w') as rbitra_datafile:
             rbitra_datafile.write(new_contents)
@@ -131,12 +131,12 @@ class DecisionUtils(object):
         ms = MemberSchema()
         ps = PluginSchema()
         data = {
-            "Decision": ds.dump(self.decision),
-            "Organization": orgsch.dump(self.org),
-            "Member": ms.dump(self.author),
-            "plugin": ps.dump(self.plugin)
+            "Decision": ds.dump(self.decision)[0],
+            "Organization": orgsch.dump(self.org)[0],
+            "Member": ms.dump(self.author)[0],
+            "Plugin": ps.dump(self.plugin)[0]
         }
-        return json.dumps(data)
+        return json.dumps(data, indent=2)
 
     def set_actions(self, actions):
         for k,v in actions.items():
@@ -146,20 +146,17 @@ class DecisionUtils(object):
         plugin = load_plugin(self.decision)
         plugin.check_action_arguments(action)
         contents = {}
-        print('\n\n\n\n\n\n\n\{}\n\n\n\n\n\n\n\n'.format(self.file_list()))
         for file in self.file_list():
-            if file.name is "rbitra.json":
-                contents = json.load(file)
+            if re.match(".*rbitra\.json$", file):
+                with open(file) as f:
+                    contents.update(json.load(f))
                 contents["actions"] = action
                 self.modify_add_commit_file(
                     self.decision.directory,
-                    file.name,
-                    json.dumps(contents),
+                    file,
+                    json.dumps(contents, indent=2),
                     "Rbitra appended action: {}".format(json.dumps(action))
                 )
-                file.close()
-            else:
-                file.close()
     # todo: @
     def submit_approval():
         db.Model
