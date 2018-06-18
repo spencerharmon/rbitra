@@ -103,10 +103,9 @@ class BasicIntegrationTest(TestCase):
         )
         actions = {}
         valid_actions = json.loads(valid_actions_resp.json)
-        print("><><>\n><><><\n{}".format(valid_actions))
         for k, v in valid_actions.items():
             # {'add_member_to_org': {'member': <str:uuid>, 'org': <str:uuid>}}
-            actions[k] = {v[0]: member['uuid'], v[1]: org['uuid']}
+            actions[k] = {v['argument_keys_list'][0]: member['uuid'], v['argument_keys_list'][1]: org['uuid']}
         response = self.client.post(
             '/create/decision',
             data={

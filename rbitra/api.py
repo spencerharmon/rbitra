@@ -78,12 +78,6 @@ class CreateDecision(Resource):
             required=True
         )
         self.parser.add_argument(
-            'member',
-            type=str,
-            help='Member UUID of decision\'s author.',
-            required=True
-        )
-        self.parser.add_argument(
             'org',
             type=str,
             help='UUID of organization.',
@@ -109,7 +103,7 @@ class CreateDecision(Resource):
         decision = Decision(
             title=args["title"],
             plugin=args["plugin"],
-            author=args["member"],
+            author=authenticated_user, ############this isn't defined yet
             org=args["org"],
             directory=args["directory"]
         )

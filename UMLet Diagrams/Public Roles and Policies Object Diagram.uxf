@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>65</x>
+      <y>10</y>
+      <w>105</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Organization&gt;&gt;
+/rbitra.models.Organization/
+--
+-uuid: String
+-name: String
+-members_role: Role
+-mod_role: Role
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>300</x>
+      <y>10</y>
+      <w>105</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Role&gt;&gt;
+/rbitra.models.Role/
+--
+-uuid: String
+-name: String
+-org: Organization
+bg=light_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1130</x>
+      <y>10</y>
+      <w>105</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Policy&gt;&gt;
+/rbitra.models.Policy/
+--
+-uuid: String
+-name: String
+-rolepolicy: RolePolicy
+-org: Organization
+-quorum: Float
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>835</x>
+      <y>10</y>
+      <w>105</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Member&gt;&gt;
+/rbitra.models.Member/
+--
+-uuid: String
+-name: String
+bg=magenta</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>175</y>
+      <w>130</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>_object:Organization_
+--
+name: String="Public"
+members_role="Members of Public"
+mod_role="Members of Public"
+
+[waiting for message]
+bg=pink
+fg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1265</x>
+      <y>10</y>
+      <w>105</w>
+      <h>85</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Decision&gt;&gt;
+/rbitra.models.Decision/
+--
+-uuid: String
+-title: String
+-policy: Policy
+-org: Organization
+-plugin: Plugin
+bg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>290</x>
+      <y>180</y>
+      <w>130</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>_object: Role_
+--
+name: String="Members of Public"
+
+bg=light_gray
+fg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>125</x>
+      <y>190</y>
+      <w>175</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+m1=0..n role
+m2=1 org</panel_attributes>
+    <additional_attributes>10.0;10.0;330.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>100</x>
+      <y>75</y>
+      <w>60</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;200.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>345</x>
+      <y>60</y>
+      <w>60</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>290</x>
+      <y>360</y>
+      <w>130</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>_object: Policy_
+--
+name: String="Public Policy"
+bg=cyan
+fg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>830</x>
+      <y>180</y>
+      <w>130</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>_object: Member_
+--
+name: String="John Q Public"
+
+bg=magenta
+fg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>300</y>
+      <w>65</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+m2=1 policy
+m1=1..n rolepolicy</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>415</x>
+      <y>80</y>
+      <w>760</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;600.0;1500.0;600.0;1500.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>415</x>
+      <y>190</y>
+      <w>140</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+m1=0..n memberrole
+m2=1 role</panel_attributes>
+    <additional_attributes>10.0;10.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>275</x>
+      <y>470</y>
+      <w>155</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>_object: Decision_
+--
+name: String="Merge Changes to rbitra"
+
+bg=red
+fg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>340</x>
+      <y>400</y>
+      <w>60</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+m2=0..n decision
+m1=1 policy</panel_attributes>
+    <additional_attributes>10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>115</x>
+      <y>215</y>
+      <w>185</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+m1=0..n policy
+m2=1 org</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;330.0;350.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>50</x>
+      <y>215</y>
+      <w>235</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+m1=0..n decision
+m2=1 org</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;540.0;450.0;540.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>60</y>
+      <w>60</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>290</x>
+      <y>260</y>
+      <w>130</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>_object: RolePolicy_
+--
+read: Bool=True
+write: Bool=True
+quorum_weight: Int=1
+bg=orange
+fg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>210</y>
+      <w>65</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+m2=0..n rolepolicy
+m1=1 role</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1000</x>
+      <y>10</y>
+      <w>105</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;RolePolicy&gt;&gt;
+/rbitra.models.RolePolicy/
+--
+-role: Role
+-policy: Policy
+-read: Bool
+-write: Bool
+-quorum_weight: Int
+
+bg=orange</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>415</x>
+      <y>70</y>
+      <w>645</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;420.0;1270.0;420.0;1270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>425</x>
+      <y>90</y>
+      <w>895</w>
+      <h>405</h>
+    </coordinates>
+    <panel_attributes>lt=.&gt;
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;790.0;1770.0;790.0;1770.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>545</x>
+      <y>180</y>
+      <w>130</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>_object: MemberRole_
+--
+
+bg=yellow
+fg=dark_gray</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>565</x>
+      <y>10</y>
+      <w>105</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;MemberRole&gt;&gt;
+/rbitra.models.Member/
+--
+-member: Member
+-role: Role
+bg=yellow</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>600</x>
+      <y>60</y>
+      <w>60</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;instanceOf&gt;&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;240.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>670</x>
+      <y>190</y>
+      <w>170</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+m1=1 member
+m2=0..n memberrole</panel_attributes>
+    <additional_attributes>10.0;10.0;320.0;10.0</additional_attributes>
+  </element>
+</diagram>

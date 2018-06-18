@@ -1,8 +1,8 @@
 
 from rbitra import db
-from rbitra.models import Configuration, Decision, Plugin, Organization, Member
-from rbitra.api_errors import FailedToCreateDecision, DataLoadError
-from rbitra.plugin_utils import load_plugin
+from rbitra.models import Configuration, Decision, Plugin, Organization, Member, Approval, MemberRole
+from rbitra.api_errors import FailedToCreateDecision, DataLoadError, PermissionsError
+from rbitra.plugin_utils import load_plugin, list_plugin_actions
 from rbitra.schema import DecisionSchema, OrganizationSchema, MemberSchema, PluginSchema
 from uuid import uuid4
 from dulwich import porcelain
@@ -61,31 +61,27 @@ class DecisionUtils(object):
             self.decision.directory = self.decision.uuid
 
     def create_decision(self):
-        try:
-            assert self.decision.uuid is None
-            self.decision.uuid = str(uuid4())
-            self.ensure_valid_values()
-            db.session.add(self.decision)
+        assert self.decision.uuid is None
+        self.decision.uuid = str(uuid4())
+        self.ensure_valid_values()
+        db.session.add(self.decision)
 
-            full_path = gen_full_path(self.decision)
-            self.create_decision_repo(full_path)
+        full_path = gen_full_path(self.decision)
+        self.create_decision_repo(full_path)
 
 
-            file_name = "rbitra.json"
-            data = self.gen_repo_description_json()
-            message = "Repo created by Rbitra. Adding decision metadata in rbitra.json."
-            self.modify_add_commit_file(full_path, file_name, data, message)
+        file_name = "rbitra.json"
+        data = self.gen_repo_description_json()
+        message = "Repo created by Rbitra. Adding decision metadata in rbitra.json."
+        self.modify_add_commit_file(full_path, file_name, data, message)
 
-            if self.actions is not None:
-                self.set_actions(self.actions)
+        if self.actions is not None:
+            self.set_actions(self.actions)
 
-            self.init_plugin()
+        self.init_plugin()
 
-            db.session.commit()
-            return self.decision
-        except AttributeError as e:
-            raise
-#            raise FailedToCreateDecision(e)
+        db.session.commit()
+        return self.decision
 
 
     def create_decision_repo(self, path):
@@ -139,8 +135,23 @@ class DecisionUtils(object):
         return json.dumps(data, indent=2)
 
     def set_actions(self, actions):
-        for k,v in actions.items():
-            self.append_action({k: v})
+        for action, args in actions.items():
+            for attrib in list_plugin_actions(self.plugin)[action]:
+                if attrib['lead_role_req']:
+                    org = Organization.query.filter_by(uuid=self.decision.org).first()
+                    member_list = [memberrole.member
+                                   for memberrole in MemberRole.query.filter_by(uuid=org.lead_role)]
+                    if self.decision.author not in member_list:
+                        raise PermissionsError(
+                            'Member {} cannot create decision with action {}.'.format(
+                                self.decision.author,
+                                action
+                            )
+                        )
+                    else:
+                        self.append_action({action: args})
+                else:
+                    self.append_action({action: args})
 
     def append_action(self, action):
         plugin = load_plugin(self.decision)
@@ -158,6 +169,43 @@ class DecisionUtils(object):
                     "Rbitra appended action: {}".format(json.dumps(action))
                 )
     # todo: @
-    def submit_approval():
-        db.Model
+    def approved_by(self, member_uuid):
+        approval = Approval()
+        approval.member = member_uuid
+        approval.decision = self.decision.uuid
+        self.check_quorum()
 
+    def check_quorum(self):
+        '''
+        Determines whether a decision's quorum has been met.
+        :return: bool, True if quorum is met, False otherwise.
+        '''
+        quorum_threshold = self.determine_quorum()
+        weighted_total = 0
+        weighted_approval = 0
+        for member_uuid in self.decision_makers():
+            weighted_total += 1 #TODO: add weights here instead of 1
+            if member_uuid in self.approval_list():
+                weighted_approval += 1 #TODO: add weights here instead of 1
+        if quorum_threshold < weighted_approval / weighted_total:
+            return True
+        else:
+            return False
+
+    def approval_list(self):
+        '''
+
+        :return: list of member UUIDs that approve of self.decision
+        '''
+        return [record.member
+                for record in Approval.query.filter_by(decision=self.decision.uuid)]
+
+    def decision_makers(self):
+        '''
+
+        :return:list of members' uuids with roles given RW access by the decision's policy
+        '''
+        return [memberrole.member
+                for policy in Policy.query.filter_by(uuid=self.decision.policy)
+                for policyrole in PolicyRole.query.filter_by(policy=policy.uuid)
+                for memberrole in MemberRoles.query.filter_by(role=policyrole.role)]

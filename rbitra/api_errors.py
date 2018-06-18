@@ -45,6 +45,7 @@ class DecisionError(HTTPException):
     code = 442
     description = "General decision error."
 
+
 class FailedToCreateDecision(DecisionError):
     """
     Raised when decision creation fails.
@@ -56,8 +57,17 @@ class FailedToCreateDecision(DecisionError):
 
 class DataLoadError(DecisionError):
     """
-    Raised when data does not load properly.
+    Raised when data does not load properly from the decision repository.
     """
     def __init__(self, data):
         self.description = "Could not load: {}".format(data)
+        super().__init__(self.description)
+
+
+class PermissionsError(DecisionError):
+    """
+    Raised when the author of a decision doesn't have the required role to create it.
+    """
+    def __init__(self, msg):
+        self.description = "Insufficient permissions: {}".format(msg)
         super().__init__(self.description)
