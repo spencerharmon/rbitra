@@ -1,12 +1,12 @@
 from flask_restful import HTTPException
 
 
-class DefaultServerUnconfigured(HTTPException):
+class ServerUnconfigured(HTTPException):
     """
-    Errors arising from a lack of a server specified in the current_config record of the Configuration table.
+    Errors arising from a missing or incomplete current_config record of the Configuration table.
     """
     code = 501
-    description = "Default server is unconfigured."
+    description = "Server is unconfigured."
 
 
 class PluginError(HTTPException):
@@ -69,5 +69,6 @@ class PermissionsError(DecisionError):
     Raised when the author of a decision doesn't have the required role to create it.
     """
     def __init__(self, msg):
+        self.code = 401
         self.description = "Insufficient permissions: {}".format(msg)
         super().__init__(self.description)

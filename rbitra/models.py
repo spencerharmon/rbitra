@@ -4,8 +4,9 @@ from rbitra import db
 class Configuration(db.Model):
     name = db.Column(db.String(64), primary_key=True, unique=True)
     any_member_may_create_orgs = db.Column(db.Boolean, default=True)
+    open_enrollment = db.Column(db.Boolean, default=True)
     decision_path = db.Column(db.String(128))
-    server = db.Column(db.Integer, db.ForeignKey('server.id'))
+    public_org = db.Column(db.String, db.ForeignKey('organization.uuid'))
 
 
 class Server(db.Model):
@@ -18,13 +19,33 @@ class Server(db.Model):
 
 
 class Organization(db.Model):
+    '''
+    Key concepts:
+        member_role: This is the role that signifies the membership to this
+            organization, therefore, all members of an organization have
+            this role.
+        mod_role: Members of the organization's mod role have the exclusive
+            permission to create decisions flagged with mod_role_req.
+            Default plugin meta_plugin has functions create_policy(),
+            create_role(), and add_member_to_org(), which are flagged
+            with this property.
+    '''
     uuid = db.Column(db.String(36), primary_key=True)
     name = db.Column(db.String(128))
     server = db.Column(db.Integer, db.ForeignKey('server.id'))
-    lead_role = db.Column(db.Integer, db.ForeignKey('role.uuid'))
+    member_role = db.Column(db.String, db.ForeignKey('role.uuid'))
+    mod_role = db.Column(db.String, db.ForeignKey('role.uuid'))
+
+
+class OrganizationLink(db.Model):
+    org_a = db.Column(db.String, db.ForeignKey('organization.uuid'), primary_key=True)
+    org_b = db.Column(db.String, db.ForeignKey('organization.uuid'), primary_key=True)
+    role = db.Column(db.String, db.ForeignKey('role.uuid'))
+
 
 class Member(db.Model):
     uuid = db.Column(db.String(36), unique=True, primary_key=True)
+    email = db.Column(db.String(256), unique=True)
     name = db.Column(db.String(128))
     server = db.Column(db.Integer, db.ForeignKey('server.id'))
 
@@ -32,11 +53,6 @@ class Member(db.Model):
 class MemberDigest(db.Model):
     member = db.Column(db.String(36), db.ForeignKey('member.uuid'), primary_key=True)
     digest = db.Column(db.String(160))
-
-
-class OrgMember(db.Model):
-    member = db.Column(db.String(36), db.ForeignKey('member.uuid'), primary_key=True)
-    org = db.Column(db.String(36), db.ForeignKey('organization.uuid'), primary_key=True)
 
 
 class Decision(db.Model):
@@ -47,10 +63,6 @@ class Decision(db.Model):
     plugin = db.Column(db.Integer, db.ForeignKey('plugin.uuid'))
     directory = db.Column(db.String(512))
     policy = db.Column(db.String(36), db.ForeignKey('policy.uuid'))
-    organization_read = db.Column(db.Boolean())
-    organization_write = db.Column(db.Boolean())
-    public_read = db.Column(db.Boolean())
-    public_write = db.Column(db.Boolean())
 
 
 class Plugin(db.Model):
@@ -68,8 +80,7 @@ class Approval(db.Model):
 class Role(db.Model):
     uuid = db.Column(db.String(36), primary_key=True)
     name = db.Column(db.String(128))
-    org_decisions_allowed = db.Column(db.Boolean())
-    pub_decisions_allowed = db.Column(db.Boolean())
+    org = db.Column(db.String(36), db.ForeignKey('organization.uuid'))
 
 
 class MemberRole(db.Model):
@@ -92,5 +103,4 @@ class PolicyRole(db.Model):
     role = db.Column(db.String(36), db.ForeignKey('role.uuid'), primary_key=True)
     read = db.Column(db.Boolean())
     write = db.Column(db.Boolean())
-
-
+    quorum_weight = db.Column(db.Integer())

@@ -76,25 +76,24 @@ def load_plugin(decision):
     return ProtoPlugin(decision, module)
 
 
-def list_plugin_actions(plugin):
+def get_plugin_actions(plugin):
     """
     :return: dict of available actions in plugin
         dict is in format:
         {'action_name': {
             'description': 'description of action'
             'argument_keys_list': ['arg1', 'arg2', et c..]
-            'lead_role_req': Bool
+            'mod_role_req': Bool
         }
     """
     module = load_plugin_module(plugin)
 
     valid_actions = {}
     for action in module.valid_actions.keys():
-        # {'action': ['arg1', 'arg2']}
         valid_actions[action] = {
             'description': module.valid_actions[action]['description'],
-            'argument_keys_list': list(module.valid_actions[action]["arg_schema"]().__dict__[declared_fields].keys()),
-            'lead_role_req': module.valid_actions[action]['lead_role_req']
+            'argument_keys_list': list(module.valid_actions[action]["arg_schema"]().__dict__['declared_fields'].keys()),
+            'mod_role_req': module.valid_actions[action]['mod_role_req']
         }
 
     return valid_actions

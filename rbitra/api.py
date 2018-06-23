@@ -1,21 +1,33 @@
 from rbitra import create_app
 from flask_restful import Api, Resource, reqparse
-from rbitra.configure import set_default_config
+from rbitra.configure import set_config
 from rbitra.org_utils import create_org
 from rbitra.member_utils import create_member
 from rbitra.decision_utils import DecisionUtils
-from rbitra.plugin_utils import install_plugin, list_plugin_actions
-from rbitra.models import Decision, Plugin
+from rbitra.plugin_utils import install_plugin, get_plugin_actions
+from rbitra.models import Decision, Plugin, Member
 from rbitra.schema import OrganizationSchema, MemberSchema, DecisionSchema, PluginSchema
 import json
-from flask_httpauth import HTTPBasicAuth
+from rbitra.auth import auth
 
 api = Api(create_app())
 
 
 class Install(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument(
+            'preset',
+            type=str,
+            help='Set wither public or private preset. Default: public'
+        )
+
     def get(self):
-        set_default_config()
+        args = self.parser.parse_args()
+        if args['preset'] is not None:
+            set_config(preset=args['preset'])
+        else:
+            set_config()
 
 
 api.add_resource(Install, '/install')
@@ -25,11 +37,23 @@ class CreateOrg(Resource):
     def __init__(self):
         self.parser = reqparse.RequestParser()
         self.parser.add_argument('org_name', type=str, help='Name of an organization.')
+        self.parser.add_argument(
+            'initial_members',
+            type=list,
+            help='List of members (in addition to the authenticated member) to add to the organization upon creation.'
+        )
 
+
+    @auth.login_required
     def post(self):
         args = self.parser.parse_args()
         schema = OrganizationSchema()
-        org = create_org(args['org_name'])
+
+        member = Member.query.filter_by(email=auth.username()).first()
+        initial_members = [member.uuid]
+        if args['initial_members'] is not None:
+            initial_members.append(args['initial_members'])
+        org = create_org(args['org_name'], initial_members)
         return schema.dumps(org)
 
 
@@ -51,11 +75,17 @@ class CreateMember(Resource):
             help='Password for new account.',
             required=True
         )
+        self.parser.add_argument(
+            'email',
+            type=str,
+            help='Member\'s email address.',
+            required=True
+        )
 
     def post(self):
         args = self.parser.parse_args()
         schema = MemberSchema()
-        member = create_member(args['member_name'], args['password'])
+        member = create_member(args['member_name'], args['password'], args['email'])
         return schema.dumps(member)
 
 
@@ -98,12 +128,14 @@ class CreateDecision(Resource):
             required=True
         )
 
+    @auth.login_required
     def post(self):
         args = self.parser.parse_args()
+        member = Member.query.filter_by(email=auth.username()).first()
         decision = Decision(
             title=args["title"],
             plugin=args["plugin"],
-            author=authenticated_user, ############this isn't defined yet
+            author=member.uuid,
             org=args["org"],
             directory=args["directory"]
         )
@@ -121,7 +153,7 @@ class PluginValidActions(Resource):
 
     def get(self, title):
         plugin = Plugin.query.filter_by(title=title).first()
-        return json.dumps(list_plugin_actions(plugin))
+        return json.dumps(get_plugin_actions(plugin))
 
 
 api.add_resource(PluginValidActions, '/plugin/<string:title>/valid_actions')

@@ -2,7 +2,7 @@
 from rbitra import db
 from rbitra.models import Configuration, Decision, Plugin, Organization, Member, Approval, MemberRole
 from rbitra.api_errors import FailedToCreateDecision, DataLoadError, PermissionsError
-from rbitra.plugin_utils import load_plugin, list_plugin_actions
+from rbitra.plugin_utils import load_plugin, get_plugin_actions
 from rbitra.schema import DecisionSchema, OrganizationSchema, MemberSchema, PluginSchema
 from uuid import uuid4
 from dulwich import porcelain
@@ -136,22 +136,22 @@ class DecisionUtils(object):
 
     def set_actions(self, actions):
         for action, args in actions.items():
-            for attrib in list_plugin_actions(self.plugin)[action]:
-                if attrib['lead_role_req']:
-                    org = Organization.query.filter_by(uuid=self.decision.org).first()
-                    member_list = [memberrole.member
-                                   for memberrole in MemberRole.query.filter_by(uuid=org.lead_role)]
-                    if self.decision.author not in member_list:
-                        raise PermissionsError(
-                            'Member {} cannot create decision with action {}.'.format(
-                                self.decision.author,
-                                action
-                            )
+            if get_plugin_actions(self.plugin)[action]['mod_role_req']:
+                org = Organization.query.filter_by(uuid=self.decision.org).first()
+                member_list = [memberrole.member
+                               for memberrole in MemberRole.query.filter_by(role=org.mod_role)]
+                print(member_list)
+                if self.decision.author not in member_list:
+                    raise PermissionsError(
+                        'Member {} cannot create decision with action {}.'.format(
+                            self.decision.author,
+                            action
                         )
-                    else:
-                        self.append_action({action: args})
+                    )
                 else:
                     self.append_action({action: args})
+            else:
+                self.append_action({action: args})
 
     def append_action(self, action):
         plugin = load_plugin(self.decision)
