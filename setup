@@ -1,2 +1,0 @@
-#!/bin/bash
-pip install flask flask-restful flask-sqlalchemy flask-testing flask-migrate flask-httpauth dulwich marshmallow
