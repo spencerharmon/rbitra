@@ -2,66 +2,112 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8694c0a-cdb2-47fa-988e-a3881178c5be" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/rbitra/decision/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/decision/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/decision/resources.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/decision/schema.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/jsonapi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/member/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/member/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/member/resources.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/member/schema.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/organization/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/organization/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/organization/resources.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/organization/schema.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/plugin/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/plugin/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/plugin/resources.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/plugin/schema.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/policy/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/policy/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/policy/resources.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/policy/schema.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/policy_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/role/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/role/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/role/resources.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rbitra/role/schema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/rbitra.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rbitra.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plugins" beforeDir="false" afterPath="$PROJECT_DIR$/plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/meta_plugin.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/rbitra/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/api.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rbitra/api_errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/api_errors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rbitra/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rbitra/configure.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/configure.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rbitra/decision_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/decision_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rbitra/member_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/member_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rbitra/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rbitra/org_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/org_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rbitra/plugin_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/plugin_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rbitra/protoplugin.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/protoplugin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rbitra/role_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra/role_utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rbitra_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/rbitra_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirments.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirments.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="1648938644">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="6" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="2017" />
+          <entry key="txt" value="45" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="45" />
+          <entry key="Python" value="2017" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="33" />
+          <entry key="txt" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="Python" value="33" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FavoritesManager">
     <favorites_list name="rbitra" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="rbitra_tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rbitra_tests.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rbitra/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api_errors.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rbitra/api_errors.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rbitra/plugin/schema.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" column="42" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="org_utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rbitra/org_utils.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rbitra/plugin/resources.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+            <state relative-caret-position="330">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -69,35 +115,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="member_utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rbitra/member_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="decision_utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rbitra/decision_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="142" column="22" selection-start-line="142" selection-start-column="22" selection-end-line="142" selection-end-column="22" />
-              <folding>
-                <element signature="e#1#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="configure.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rbitra/configure.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rbitra/policy/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rbitra/policy/resources.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+              <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rbitra/member/resources.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -105,37 +149,49 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="auth.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rbitra/auth.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rbitra/member/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+            <state relative-caret-position="135">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rbitra/member/schema.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rbitra/policy/schema.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rbitra/policy/model.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rbitra/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="91" selection-start-line="91" selection-end-line="96" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/rbitra/api.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
-              <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="plugin_utils.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rbitra/plugin_utils.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="78" column="14" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -152,29 +208,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find />
-      <find>path</find>
-      <find>gen_full</find>
-      <find>append_action</find>
-      <find>modify_add_comm</find>
-      <find>print</find>
-      <find>modify_</find>
-      <find>gen_repo_</find>
-      <find>create/</find>
-      <find>load_models</find>
-      <find>read</find>
-      <find>approval_list</find>
-      <find>create</find>
-      <find>Int</find>
-      <find>/create/org</find>
-      <find>/install</find>
-      <find>/install'</find>
-      <find>Defaule</find>
-      <find>declared</find>
-      <find>member</find>
-      <find>member_data</find>
       <find>/create/mem</find>
-      <find>Member</find>
       <find>list_</find>
       <find>raise</find>
       <find>442</find>
@@ -182,6 +216,28 @@
       <find>crrea</find>
       <find>create/or</find>
       <find>/crea</find>
+      <find>uuid4().__str__()</find>
+      <find>default=str(uuid4())</find>
+      <find>rmdir</find>
+      <find>load_plugin</find>
+      <find>is_appro</find>
+      <find>parse_re</find>
+      <find>json</find>
+      <find>class Organ</find>
+      <find>class Or</find>
+      <find>class Role</find>
+      <find>class R</find>
+      <find>class Member</find>
+      <find>Organization</find>
+      <find>organization</find>
+      <find>class Decis</find>
+      <find>Member</find>
+      <find>member</find>
+      <find>Plugin</find>
+      <find>class Plu</find>
+      <find>Role</find>
+      <find>role</find>
+      <find>class Polic</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -190,35 +246,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/rbitra.py" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/rbitra/plugins/meta_plugin" />
-        <option value="$PROJECT_DIR$/rbitra/test_config.py" />
-        <option value="$PROJECT_DIR$/rbitra/__init__.py" />
         <option value="$PROJECT_DIR$/rbitra/repo_utils.py" />
         <option value="$PROJECT_DIR$/rbitra/plugins/meta_plugin.py" />
         <option value="$PROJECT_DIR$/rbitra/marshal.py" />
-        <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/testplugins/testpath/__init__.py" />
         <option value="$PROJECT_DIR$/testplugins/file:---home-spencer-git-repos-meta_plugin/meta_plugin.py" />
         <option value="$PROJECT_DIR$/test_config.py" />
         <option value="$PROJECT_DIR$/testplugins/https:--www.github.com-spencerharmon-meta_plugin/meta_plugin.py" />
         <option value="$PROJECT_DIR$/rbitra/pluginproto.py" />
         <option value="$PROJECT_DIR$/rbitra/schema.py" />
-        <option value="$PROJECT_DIR$/rbitra/protoplugin.py" />
         <option value="$PROJECT_DIR$/rbitra/decisions/f652ddaf-0935-4aea-8108-c60b5355cf89/testdecision/rbitra.json" />
-        <option value="$PROJECT_DIR$/rbitra/role_utils.py" />
         <option value="$PROJECT_DIR$/testplugins/https:--www.github.com-spencerharmon-meta_plugin/__init__.py" />
         <option value="$PROJECT_DIR$/rbitra/auth.py" />
         <option value="$PROJECT_DIR$/rbitra/plugin_utils.py" />
-        <option value="$PROJECT_DIR$/rbitra/decision_utils.py" />
-        <option value="$PROJECT_DIR$/rbitra/member_utils.py" />
-        <option value="$PROJECT_DIR$/rbitra/org_utils.py" />
         <option value="$PROJECT_DIR$/rbitra/api_errors.py" />
         <option value="$PROJECT_DIR$/rbitra/configure.py" />
-        <option value="$PROJECT_DIR$/rbitra/models.py" />
-        <option value="$PROJECT_DIR$/rbitra_tests.py" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/rbitra/org_utils.py" />
+        <option value="$PROJECT_DIR$/rbitra/role_utils.py" />
+        <option value="$PROJECT_DIR$/rbitra/member_utils.py" />
+        <option value="$PROJECT_DIR$/rbitra/policy_utils.py" />
+        <option value="$PROJECT_DIR$/rbitra/decision_utils.py" />
+        <option value="$PROJECT_DIR$/rbitra/protoplugin.py" />
         <option value="$PROJECT_DIR$/rbitra/api.py" />
+        <option value="$PROJECT_DIR$/requirments.txt" />
+        <option value="$PROJECT_DIR$/rbitra_tests.py" />
+        <option value="$PROJECT_DIR$/rbitra/models.py" />
+        <option value="$PROJECT_DIR$/rbitra/jsonapi.py" />
+        <option value="$PROJECT_DIR$/rbitra/organization/schema.py" />
+        <option value="$PROJECT_DIR$/rbitra/role/model.py" />
+        <option value="$PROJECT_DIR$/rbitra/role/schema.py" />
+        <option value="$PROJECT_DIR$/rbitra/organization/resources.py" />
+        <option value="$PROJECT_DIR$/rbitra/role/resources.py" />
+        <option value="$PROJECT_DIR$/rbitra/role/__init__.py" />
+        <option value="$PROJECT_DIR$/rbitra/organization/__init__.py" />
+        <option value="$PROJECT_DIR$/rbitra/organization/model.py" />
+        <option value="$PROJECT_DIR$/rbitra/member/schema.py" />
+        <option value="$PROJECT_DIR$/rbitra/member/resources.py" />
+        <option value="$PROJECT_DIR$/rbitra/member/__init__.py" />
+        <option value="$PROJECT_DIR$/rbitra/decision/__init__.py" />
+        <option value="$PROJECT_DIR$/rbitra/decision/model.py" />
+        <option value="$PROJECT_DIR$/rbitra/decision/resources.py" />
+        <option value="$PROJECT_DIR$/rbitra/decision/schema.py" />
+        <option value="$PROJECT_DIR$/rbitra/plugin/__init__.py" />
+        <option value="$PROJECT_DIR$/rbitra/plugin/model.py" />
+        <option value="$PROJECT_DIR$/rbitra/plugin/schema.py" />
+        <option value="$PROJECT_DIR$/rbitra/plugin/resources.py" />
+        <option value="$PROJECT_DIR$/rbitra/policy/__init__.py" />
+        <option value="$PROJECT_DIR$/rbitra/policy/resources.py" />
+        <option value="$PROJECT_DIR$/rbitra/policy/schema.py" />
+        <option value="$PROJECT_DIR$/rbitra/policy/model.py" />
+        <option value="$PROJECT_DIR$/rbitra/member/model.py" />
       </list>
     </option>
   </component>
@@ -248,37 +326,7 @@
               <item name="rbitra" type="b2602c69:ProjectViewProjectNode" />
               <item name="rbitra" type="462c0819:PsiDirectoryNode" />
               <item name="rbitra" type="462c0819:PsiDirectoryNode" />
-              <item name="decisions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rbitra" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rbitra" type="462c0819:PsiDirectoryNode" />
-              <item name="rbitra" type="462c0819:PsiDirectoryNode" />
-              <item name="decisions" type="462c0819:PsiDirectoryNode" />
-              <item name="3f55b9d0-6d46-41e4-8574-26a1eab083f5" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rbitra" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rbitra" type="462c0819:PsiDirectoryNode" />
-              <item name="rbitra" type="462c0819:PsiDirectoryNode" />
-              <item name="decisions" type="462c0819:PsiDirectoryNode" />
-              <item name="3f55b9d0-6d46-41e4-8574-26a1eab083f5" type="462c0819:PsiDirectoryNode" />
-              <item name="testdecision" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rbitra" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rbitra" type="462c0819:PsiDirectoryNode" />
-              <item name="rbitra" type="462c0819:PsiDirectoryNode" />
-              <item name="decisions" type="462c0819:PsiDirectoryNode" />
-              <item name="c9548fa7-9702-4345-9686-0ea5321edf90" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rbitra" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rbitra" type="462c0819:PsiDirectoryNode" />
-              <item name="rbitra" type="462c0819:PsiDirectoryNode" />
-              <item name="decisions" type="462c0819:PsiDirectoryNode" />
-              <item name="c9548fa7-9702-4345-9686-0ea5321edf90" type="462c0819:PsiDirectoryNode" />
-              <item name="testdecision" type="462c0819:PsiDirectoryNode" />
+              <item name="member" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -287,12 +335,19 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/env" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/rbitra/policy" />
+      <recent name="$PROJECT_DIR$/rbitra/plugin" />
+      <recent name="$PROJECT_DIR$/rbitra" />
+      <recent name="$PROJECT_DIR$/rbitra/member" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/rbitra" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -325,6 +380,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
@@ -349,23 +407,23 @@
     <frame x="0" y="27" width="1366" height="741" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4965157" visible="true" weight="0.24497394" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.25261325" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32905295" />
-      <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4965157" visible="true" weight="0.24348474" />
       <window_info id="Structure" order="1" sideWeight="0.5034843" side_tool="true" weight="0.24497394" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3989547" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.3298585" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3275563" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3275563" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4599303" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Python Console" order="7" weight="0.32582322" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32928944" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32905295" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.25261325" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3292683" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -373,206 +431,20 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/rbitra/api.py</url>
-          <line>144</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="7" />
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/rbitra/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/schema.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="38" selection-start-column="38" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/plugin_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1680">
-          <caret line="122" column="42" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/protoplugin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="88" column="24" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/configure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/org_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="39" column="37" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra.py" />
-    <entry file="file://$PROJECT_DIR$/rbitra/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/configure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/org_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra.py" />
-    <entry file="file://$PROJECT_DIR$/rbitra/api.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="62" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra.py" />
-    <entry file="file://$PROJECT_DIR$/rbitra/repo_utils.py" />
-    <entry file="file://$PROJECT_DIR$/rbitra/plugins/meta_plugin.py" />
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="61" lean-forward="true" selection-start-line="9" selection-start-column="61" selection-end-line="10" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testplugins/testpath/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/rbitra/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testplugins/file:---home-spencer-git-repos-meta_plugin/meta_plugin.py" />
-    <entry file="file://$PROJECT_DIR$/testplugins/https:--www.github.com-spencerharmon-meta_plugin/meta_plugin.py" />
-    <entry file="file://$PROJECT_DIR$/rbitra/decisions/e75a63d6-0892-47b0-9d44-719316534dd7/testdecision/rbitra.json" />
-    <entry file="file://$PROJECT_DIR$/rbitra/decisions/e7a815bb-f90b-410e-98b9-61eaa35941f5/testdecision/rbitra.json" />
     <entry file="file://$PROJECT_DIR$/rbitra/decisions/0a47a6bf-b38e-4b3a-af27-b24177f4dddc/testdecision/rbitra.json" />
     <entry file="file://$PROJECT_DIR$/rbitra/decisions/27c95d33-2e29-4539-b67b-474a9494353b/testdecision/rbitra.json" />
     <entry file="file://$PROJECT_DIR$/rbitra/decisions/f652ddaf-0935-4aea-8108-c60b5355cf89/testdecision/rbitra.json" />
-    <entry file="file://$PROJECT_DIR$/rbitra/decisions/3f55b9d0-6d46-41e4-8574-26a1eab083f5/testdecision/rbitra.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/schema.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="38" selection-start-column="38" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/protoplugin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="88" column="24" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/role_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/decisions/3f55b9d0-6d46-41e4-8574-26a1eab083f5/testdecision/rbitra.json" />
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -582,56 +454,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testplugins/https:--www.github.com-spencerharmon-meta_plugin/LICENSE" />
     <entry file="file://$PROJECT_DIR$/testplugins/https:--www.github.com-spencerharmon-meta_plugin/__init__.py" />
-    <entry file="file://$PROJECT_DIR$/rbitra/plugin_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="78" column="14" selection-start-line="78" selection-start-column="14" selection-end-line="78" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/auth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/member_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/org_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/decision_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="142" column="22" selection-start-line="142" selection-start-column="22" selection-end-line="142" selection-end-column="22" />
-          <folding>
-            <element signature="e#1#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rbitra/api_errors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -639,40 +461,358 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="35" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/role_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/org_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="585">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/rbitra/configure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        <state relative-caret-position="630">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/decision_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2760">
+          <caret line="196" selection-start-line="196" selection-end-line="196" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/plugin_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/protoplugin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1440">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env/lib/python3.7/site-packages/flask_rest_jsonapi/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/member_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/models.py">
+    <entry file="file://$PROJECT_DIR$/rbitra/auth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+        <state relative-caret-position="135">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/api.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirments.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/policy_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="38" column="46" selection-start-line="38" selection-start-column="46" selection-end-line="38" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rbitra_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="49" column="41" selection-start-line="49" selection-start-column="41" selection-end-line="49" selection-end-column="41" />
+        <state relative-caret-position="2010">
+          <caret line="144" selection-start-line="144" selection-end-line="144" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rbitra/api.py">
+    <entry file="file://$PROJECT_DIR$/rbitra/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        <state relative-caret-position="195">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/jsonapi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="54" column="39" selection-start-line="54" selection-start-column="39" selection-end-line="54" selection-end-column="39" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/organization/schema.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="46" lean-forward="true" selection-start-column="46" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/role/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/role/schema.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="8" lean-forward="true" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+          <folding>
+            <marker date="1540146185943" expanded="true" signature="74:79" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/organization/resources.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="21" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <marker date="1540146185913" expanded="true" signature="442:447" ph="..." />
+            <marker date="1540146185913" expanded="true" signature="580:585" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/role/resources.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="40" lean-forward="true" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/role/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="41" selection-start-line="2" selection-start-column="41" selection-end-line="2" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/organization/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/organization/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" lean-forward="true" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/member/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/decision/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/decision/resources.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="37" lean-forward="true" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/decision/schema.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/decision/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/plugin/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/plugin/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/schema.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" selection-start-line="24" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/plugin/schema.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/plugin/resources.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/policy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/policy/schema.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="91" selection-start-line="91" selection-end-line="96" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/policy/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/policy/resources.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/member/schema.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/member/resources.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rbitra/member/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>

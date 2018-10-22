@@ -1,4 +1,5 @@
 from rbitra import db
+from uuid import uuid4
 
 
 class Configuration(db.Model):
@@ -91,16 +92,20 @@ class MemberRole(db.Model):
 class Policy(db.Model):
     uuid = db.Column(db.String(36), primary_key=True)
     name = db.Column(db.String(128))
+    org = db.Column(db.String(36), db.ForeignKey('organization.uuid'))
+    quorum = db.Column(db.Numeric(precision=3, scale=3))
 
 
-class PolicyRole(db.Model):
+class RolePolicy(db.Model):
     """
-    defines RO/RW permissions on a decision for roles associated with a policy.
-    Additionally, members with roles that have write permissions for decisions
-    associated with this policy may create decisions that use this policy.
+    Defines observe/participate permissions for a decision with roles associated with this policy. Additionally, members
+    with roles that have participate permissions for decisions associated with this policy may create decisions that use
+    this policy.
     """
     policy = db.Column(db.String(36), db.ForeignKey('policy.uuid'), primary_key=True)
     role = db.Column(db.String(36), db.ForeignKey('role.uuid'), primary_key=True)
-    read = db.Column(db.Boolean())
-    write = db.Column(db.Boolean())
-    quorum_weight = db.Column(db.Integer())
+    # observe = read permission
+    observe = db.Column(db.Boolean(), default=True)
+    # participate = read/write permission
+    participate = db.Column(db.Boolean(), default=True)
+    quorum_weight = db.Column(db.Integer(), default=1)

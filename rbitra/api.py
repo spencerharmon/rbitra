@@ -5,6 +5,7 @@ from rbitra.org_utils import create_org
 from rbitra.member_utils import create_member
 from rbitra.decision_utils import DecisionUtils
 from rbitra.plugin_utils import install_plugin, get_plugin_actions
+from rbitra.policy_utils import list_policies
 from rbitra.models import Decision, Plugin, Member
 from rbitra.schema import OrganizationSchema, MemberSchema, DecisionSchema, PluginSchema
 import json
@@ -19,7 +20,7 @@ class Install(Resource):
         self.parser.add_argument(
             'preset',
             type=str,
-            help='Set wither public or private preset. Default: public'
+            help='Set whether public or private preset. Default: public'
         )
 
     def get(self):
@@ -127,19 +128,26 @@ class CreateDecision(Resource):
                  'or the /decision/[decision uuid]/valid_actions resource.',
             required=True
         )
+        self.parser.add_argument(
+            'policy',
+            type=str,
+            help='Policy with which to create the decision',
+            required=True
+        )
 
     @auth.login_required
     def post(self):
         args = self.parser.parse_args()
         member = Member.query.filter_by(email=auth.username()).first()
         decision = Decision(
-            title=args["title"],
-            plugin=args["plugin"],
+            title=args['title'],
+            plugin=args['plugin'],
             author=member.uuid,
-            org=args["org"],
-            directory=args["directory"]
+            org=args['org'],
+            policy=args['policy'],
+            directory=args['directory']
         )
-        actions = json.loads(args["actions"])
+        actions = json.loads(args['actions'])
         du = DecisionUtils(decision, actions=actions)
         schema = DecisionSchema()
         decision = du.create_decision()
@@ -158,6 +166,8 @@ class PluginValidActions(Resource):
 
 api.add_resource(PluginValidActions, '/plugin/<string:title>/valid_actions')
 
+
+#todo: install plugin should be a decision made by mod_org
 class InstallPlugin(Resource):
     def __init__(self):
         self.parser = reqparse.RequestParser()
@@ -171,8 +181,57 @@ class InstallPlugin(Resource):
     def post(self):
         args = self.parser.parse_args()
         schema = PluginSchema()
-        member = install_plugin(args['git_url'])
-        return schema.dumps(member)
+        plugin = install_plugin(args['git_url'])
+        return schema.dumps(plugin)
 
 
 api.add_resource(InstallPlugin, '/install/plugin')
+
+
+class Approve(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument(
+            'decision',
+            type=str,
+            help='UUID of a decision to be approved.',
+            required=True
+        )
+
+    @auth.login_required
+    def post(self):
+        args = self.parser.parse_args()
+        decision = Decision.query.filter_by(uuid=args['decision']).first()
+        du = DecisionUtils(decision=decision)
+        member = Member.query.filter_by(email=auth.username()).first()
+        du.approve(member.uuid)
+        ret = {
+            'approval': {
+                'member': member.uuid,
+                'decision': decision.uuid
+            }
+        }
+        return ret
+
+
+api.add_resource(Approve, '/approve/decision')
+
+
+class ListPolicies(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument(
+            'org',
+            type=str,
+            help='The organization whose available policies will be listed.',
+            required=True
+        )
+
+    @auth.login_required
+    def get(self):
+        args = self.parser.parse_args()
+        member = Member.query.filter_by(email=auth.username()).first()
+        return list_policies(member.uuid, args['org'])
+
+
+api.add_resource(ListPolicies, '/list/policies')

@@ -13,8 +13,7 @@ def create_member(name, password, email):
     API resource is not exposed to specify server. local server is used by default.
     """
     uuid = str(uuid4())
-
-    member = Member(name=name, email=email, uuid=uuid)
+    member = Member(uuid=uuid, name=name, email=email)
 
     db.session.add(member)
     db.session.commit()

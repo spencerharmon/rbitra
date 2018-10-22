@@ -1,8 +1,9 @@
 from rbitra import decision_utils
 from rbitra.api_errors import RepoCouldNotBeLoaded, PluginMethodUndefined, PluginContentsError
 from dulwich.repo import Repo
+import marshmallow
 import json
-
+import re
 
 class ProtoPlugin(object):
     """
@@ -22,6 +23,7 @@ class ProtoPlugin(object):
         self.repo = Repo.discover(start=decision_utils.gen_full_path(self.decision))
         self.du = decision_utils.DecisionUtils(decision)
 
+        self.parse_repo()
 
     def parse_repo(self):
         '''
@@ -30,11 +32,12 @@ class ProtoPlugin(object):
         repo, and raises an exception otherwise.
         :returns: JSON
         '''
-        for file in self.du.file_list():
-            if file.name is "rbitra.json":
-                self.check_and_load_actions(file)
+        for filename in self.du.file_list():
+            if re.match(".*/rbitra.json$", filename):
+                with open(filename) as file:
+                    self.check_and_load_actions(file)
             else:
-                self.attachments.append(file)
+                self.attachments.append(filename)
 
     def init_decision_repo(self):
         """
@@ -61,34 +64,40 @@ class ProtoPlugin(object):
         contents = json.load(file)
         try:
             method_list = []
-            for k, v in self.plugin_module.valid_actions:
+            for k, v in self.plugin_module.valid_actions.items():
                 method_list.append(k)
-            if contents["action"] not in method_list:
-                raise PluginContentsError
-            for action in contents["actions"]:
-                self.check_action_arguments(action)
-            self.actions = contents["actions"]
-        except AttributeError or marshmallow.ValidationError:
+            if "Actions" in contents:
+                for action, arguments in contents["Actions"].items():
+                    if action not in method_list:
+                        raise PluginContentsError
+                    self.check_action_arguments(actions={action: arguments})
+                    self.actions = contents["Actions"]
+        except (AttributeError, marshmallow.ValidationError):
             raise PluginContentsError(file.name, self.__name__)
 
-    def check_action_arguments(self, action):
+    def check_action_arguments(self, actions=None):
         """
         initializes marshmallow schema for action with provided argument dict
-        :param action: single-member dict whose key represents the method to be executed
+        :param actions: actions dict
         :return: None. Raises marshmallow ValidationError if
         """
         #TODO: catch invalid action strings
-        try:
-            schema = self.plugin_module.valid_actions[list(action.keys())[0]]["arg_schema"]()
-            schema.dump(list(action.values())[0])
-        except AttributeError:
-            raise PluginMethodUndefined(action.keys()[1])
+        if actions is not None:
+            dict = actions
+        else:
+            dict = self.actions
+        for action, arguments in dict.items():
+            try:
+                    schema = self.plugin_module.valid_actions[action]["arg_schema"]()
+                    schema.dump(arguments)
+            except AttributeError:
+                raise PluginMethodUndefined(action)
 
     def enact(self):
         """
-        enact is the primary function of a plugin. It's what it "does."
+        enact executes the actions specified from the plugin specified in the decision.
         :return:
         """
         #TODO: catch invalid action strings
-        for action, arguments in self.actions:
+        for action, arguments in self.actions.items():
             self.plugin_module.valid_actions[action]["action"](arguments, attachments=self.attachments)

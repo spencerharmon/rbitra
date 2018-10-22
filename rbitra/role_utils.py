@@ -4,7 +4,8 @@ from uuid import uuid4
 
 
 def create_role(name, org_uuid):
-    role = Role(name=name, org=org_uuid, uuid=uuid4().__str__())
+    uuid = str(uuid4())
+    role = Role(uuid=uuid, name=name, org=org_uuid)
     db.session.add(role)
     db.session.commit()
     return role

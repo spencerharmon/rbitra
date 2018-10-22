@@ -1,11 +1,13 @@
 
 from rbitra import db
-from rbitra.models import Configuration, Decision, Plugin, Organization, Member, Approval, MemberRole
+from rbitra.models import Configuration, Decision, Plugin, Organization, Member, Approval, MemberRole, Policy, \
+    RolePolicy
 from rbitra.api_errors import FailedToCreateDecision, DataLoadError, PermissionsError
 from rbitra.plugin_utils import load_plugin, get_plugin_actions
 from rbitra.schema import DecisionSchema, OrganizationSchema, MemberSchema, PluginSchema
 from uuid import uuid4
 from dulwich import porcelain
+from decimal import Decimal
 import json
 import os
 import re
@@ -130,7 +132,7 @@ class DecisionUtils(object):
             "Decision": ds.dump(self.decision)[0],
             "Organization": orgsch.dump(self.org)[0],
             "Member": ms.dump(self.author)[0],
-            "Plugin": ps.dump(self.plugin)[0]
+            "Plugin": ps.dump(self.plugin)[0],
         }
         return json.dumps(data, indent=2)
 
@@ -155,24 +157,26 @@ class DecisionUtils(object):
 
     def append_action(self, action):
         plugin = load_plugin(self.decision)
-        plugin.check_action_arguments(action)
-        contents = {}
+        plugin.actions.update(action)
+        plugin.check_action_arguments()
         for file in self.file_list():
             if re.match(".*rbitra\.json$", file):
                 with open(file) as f:
-                    contents.update(json.load(f))
-                contents["actions"] = action
+                    contents =json.load(f)
+                contents.update({"Actions": action})
                 self.modify_add_commit_file(
                     self.decision.directory,
                     file,
                     json.dumps(contents, indent=2),
                     "Rbitra appended action: {}".format(json.dumps(action))
                 )
-    # todo: @
-    def approved_by(self, member_uuid):
+
+    def approve(self, member_uuid):
         approval = Approval()
         approval.member = member_uuid
         approval.decision = self.decision.uuid
+        db.session.add(approval)
+        db.session.commit()
         self.check_quorum()
 
     def check_quorum(self):
@@ -180,14 +184,20 @@ class DecisionUtils(object):
         Determines whether a decision's quorum has been met.
         :return: bool, True if quorum is met, False otherwise.
         '''
-        quorum_threshold = self.determine_quorum()
+        policy = Policy.query.filter_by(uuid=self.decision.policy).first()
+        print(policy)
+        quorum_threshold = Policy.query.filter_by(uuid=self.decision.policy).first().quorum
         weighted_total = 0
         weighted_approval = 0
-        for member_uuid in self.decision_makers():
-            weighted_total += 1 #TODO: add weights here instead of 1
+        for member_uuid, quorum_weight in self.decision_makers().items():
+            print("Member: {}, Weight: {}".format(member_uuid, quorum_weight))
+            weighted_total += quorum_weight
             if member_uuid in self.approval_list():
-                weighted_approval += 1 #TODO: add weights here instead of 1
-        if quorum_threshold < weighted_approval / weighted_total:
+                weighted_approval += quorum_weight
+        if quorum_threshold < Decimal(weighted_approval) / Decimal(weighted_total):
+            plugin = load_plugin(self.decision)
+            plugin.enact()
+            # todo: should enact always be carried out here?
             return True
         else:
             return False
@@ -205,7 +215,8 @@ class DecisionUtils(object):
 
         :return:list of members' uuids with roles given RW access by the decision's policy
         '''
-        return [memberrole.member
+        return {memberrole.member: policyrole.quorum_weight
                 for policy in Policy.query.filter_by(uuid=self.decision.policy)
-                for policyrole in PolicyRole.query.filter_by(policy=policy.uuid)
-                for memberrole in MemberRoles.query.filter_by(role=policyrole.role)]
+                for policyrole in RolePolicy.query.filter_by(policy=policy.uuid).order_by(RolePolicy.quorum_weight)
+                if policyrole.participate is True
+                for memberrole in MemberRole.query.filter_by(role=policyrole.role)}
