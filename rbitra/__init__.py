@@ -21,4 +21,5 @@ def create_app(*,test=False):
     migrate = Migrate(app, db)
     return app
 
-from rbitra import api, models
+
+from rbitra import api, decision, member, organization, plugin, policy, role, associations

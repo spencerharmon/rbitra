@@ -15,6 +15,9 @@ class Organization(db.Model):
     """
     uuid = db.Column(db.String(36), primary_key=True)
     name = db.Column(db.String(128))
-    server = db.Column(db.Integer, db.ForeignKey('server.id'))
-    member_role = db.Column(db.String, db.ForeignKey('role.uuid'))
-    mod_role = db.Column(db.String, db.ForeignKey('role.uuid'))
+    server = db.relationship('server')
+    member_role = db.relationship('Role')
+    mod_role = db.relationship('Role')
+    roles = db.relationship('Role', back_populates='org')
+    policies = db.relationship('Policy', back_populates='org')
+    decisions = db.relationship('Decision', back_populates='org')
